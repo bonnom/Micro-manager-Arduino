@@ -10,7 +10,7 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 ## Working Arduino boards:
 * Teensy 3.2 & 3.1 - Recommended Board
   - Seems to be working alright
-  - All digital pins are 5 volt tolerant on Teensy 3.2 & 3.1. However, the analog-only pins (A10-A14), AREF, Program and Reset are 3.3V only
+  - All currently used pins in the sketch are 5V tolerant, for non-5V tolerant pins see [link](https://www.pjrc.com/teensy/teensy31.html)
   - DAC pin A14
   - All other pins are the same as the original UNO firmware
   - Handy: [Pinout](https://www.pjrc.com/teensy/card7a_rev1.png)
