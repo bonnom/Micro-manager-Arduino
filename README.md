@@ -3,9 +3,10 @@ This repo contains a more universal arduino firmware that works on some 32-bit a
 # Micro-manager-Arduino
 The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster 32-bit arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
 
-Please keep in mind that the 32-bit boards in general don't have a 5V output and that most of them don't have 5V tolerant inputs. 
-A lot of devices should be triggered just fine with the arduinos 3.3V output but it is not guaranteed.
+Please keep in mind that the 32-bit arduinos boards gets damaged when 5V is applied on the input pins. 
 Voltage level conversion must be needed when using 5V input on not 5V tolerant boards.
+
+Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
 ## Working Arduino boards:
 * Teensy 3.2 & 3.1
