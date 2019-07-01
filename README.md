@@ -8,8 +8,8 @@ A lot of devices should be triggered just fine with the arduinos 3.3V output but
 Voltage level conversion must be needed when using 5V input on not 5V tolerant boards.
 
 ## Working Arduino boards:
-* Teensy 3.2 & 3.1 - Recommended Board
-  - Seems to be working alright
+* Teensy 3.2 & 3.1
+  - Doesn't seem to be working fully at the moment
   - All currently used pins in the sketch are 5V tolerant, for non-5V tolerant pins see [link](https://www.pjrc.com/teensy/teensy31.html)
   - DAC pin A14
   - All other pins are the same as the original UNO firmware
