@@ -10,7 +10,7 @@ Also the digital output is 3.3V, most devices that work with 5V input also work 
 
 ## Working Arduino boards:
 * Teensy 3.2 & 3.1
-  - Works sometimes, need more testing
+  - Seems to work fine, but more testing is needed
   - All currently used pins in the sketch are 5V tolerant, for non-5V tolerant pins see [link](https://www.pjrc.com/teensy/teensy31.html)
   - DAC pin A14
   - All other pins are the same as the original UNO firmware
