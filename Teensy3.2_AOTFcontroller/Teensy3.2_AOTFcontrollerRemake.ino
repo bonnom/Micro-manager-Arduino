@@ -134,7 +134,7 @@
  // pin on whick to receive the trigger (2 and 3 can be used with interrupts, although this code does not use them)
   int inPin_ = 2;
  // to read out the state of inPin_ faster, ise
-  int inPinBit_ = 1<< inPin_; // bit mask
+ // int inPinBit_ = 1<< inPin_; // bit mask
 
  // TLV5618 configuration
   int dataPin  = 3; // DIN
