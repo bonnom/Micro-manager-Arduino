@@ -23,15 +23,14 @@ Also the digital output is 3.3V, most devices that work with 5V input also work 
 * Teensy 3.6
   - Teensy 3.6: NOT 5V TOLERANT!!
   
-* Sipeed Maix boards
-  - ADC not implemented
-  - DAC not implemented
-  - Not yet fully tested
+
   
 ## Not working boards:
   - Any esp8266 board
   - Any esp32 board
   - Arduino Due
+  - Sipeed Maix boards
+
 
 ## To be tested:
  - Teensy LC
