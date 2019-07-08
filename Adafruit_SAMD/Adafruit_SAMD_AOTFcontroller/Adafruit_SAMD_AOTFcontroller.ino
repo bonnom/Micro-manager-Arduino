@@ -170,7 +170,7 @@ void setup() {
 
   pinMode(inPin_, INPUT);
   pinMode(dataPin, OUTPUT);
-  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
@@ -200,7 +200,7 @@ void loop() {
 
        if (!blanking_)
        {
-         digitalWrite(8, bitRead(currentPattern_,0));
+         digitalWrite(7, bitRead(currentPattern_,0));
          digitalWrite(9, bitRead(currentPattern_,1));
          digitalWrite(10, bitRead(currentPattern_,2));
          digitalWrite(11, bitRead(currentPattern_,3));
@@ -287,7 +287,7 @@ void loop() {
            triggerNr_ = -skipTriggers_;
            triggerState_ = digitalRead(inPin_) == HIGH;
            portbAlt = B00000000;
-           digitalWrite(8, 0);
+           digitalWrite(7, 0);
            digitalWrite(9, 0);
            digitalWrite(10, 0);
            digitalWrite(11, 0);
@@ -302,7 +302,7 @@ void loop() {
        case 9:
           triggerMode_ = false;
           portbAlt = B00000000;
-          digitalWrite(8, 0);
+          digitalWrite(7, 0);
           digitalWrite(9, 0);
           digitalWrite(10, 0);
           digitalWrite(11, 0);
@@ -357,7 +357,7 @@ void loop() {
            for (byte i = 0; i < repeatPattern_ && (Serial.available() == 0); i++) {
              for (int j = 0; j < patternLength_ && (Serial.available() == 0); j++) {
                portbAlt = triggerPattern_[j];
-               digitalWrite(8, bitRead(triggerPattern_[j],0));
+               digitalWrite(7, bitRead(triggerPattern_[j],0));
                digitalWrite(9, bitRead(triggerPattern_[j],1));
                digitalWrite(10, bitRead(triggerPattern_[j],2));
                digitalWrite(11, bitRead(triggerPattern_[j],3));
@@ -366,7 +366,7 @@ void loop() {
                delay(triggerDelay_[j]);
              }
            }
-           digitalWrite(8, 0);
+           digitalWrite(7, 0);
            digitalWrite(9, 0);
            digitalWrite(10, 0);
            digitalWrite(11, 0);
@@ -458,7 +458,7 @@ void loop() {
       if (tmp != triggerState_) {
         if (blankOnHigh_ && tmp ) {
           portbAlt = 0;
-          digitalWrite(8, 0);
+          digitalWrite(7, 0);
           digitalWrite(9, 0);
           digitalWrite(10, 0);
           digitalWrite(11, 0);
@@ -468,7 +468,7 @@ void loop() {
         }
         else if (!blankOnHigh_ && !tmp ) {
           portbAlt = 0;
-          digitalWrite(8, 0);
+          digitalWrite(7, 0);
           digitalWrite(9, 0);
           digitalWrite(10, 0);
           digitalWrite(11, 0);
@@ -478,7 +478,7 @@ void loop() {
         else { 
           if (triggerNr_ >=0) {
             portbAlt = triggerPattern_[sequenceNr_];
-            digitalWrite(8, bitRead(triggerPattern_[sequenceNr_],0));
+            digitalWrite(7, bitRead(triggerPattern_[sequenceNr_],0));
             digitalWrite(9, bitRead(triggerPattern_[sequenceNr_],1));
             digitalWrite(10, bitRead(triggerPattern_[sequenceNr_],2));
             digitalWrite(11, bitRead(triggerPattern_[sequenceNr_],3));
@@ -498,7 +498,7 @@ void loop() {
         if (! digitalRead(inPin_))
         {
           portbAlt = currentPattern_;
-          digitalWrite(8, bitRead(currentPattern_,0));
+          digitalWrite(7, bitRead(currentPattern_,0));
           digitalWrite(9, bitRead(currentPattern_,1));
           digitalWrite(10, bitRead(currentPattern_,2));
           digitalWrite(11, bitRead(currentPattern_,3));
@@ -508,7 +508,7 @@ void loop() {
         else
         {
           portbAlt = 0;
-          digitalWrite(8, 0);
+          digitalWrite(7, 0);
           digitalWrite(9, 0);
           digitalWrite(10, 0);
           digitalWrite(11, 0);
@@ -518,7 +518,7 @@ void loop() {
       }  else {
         if (! digitalRead(inPin_)) {
           portbAlt = 0;
-          digitalWrite(8, 0);
+          digitalWrite(7, 0);
           digitalWrite(9, 0);
           digitalWrite(10, 0);
           digitalWrite(11, 0);
@@ -527,7 +527,7 @@ void loop() {
         }
         else  {
           portbAlt = currentPattern_;
-          digitalWrite(8, bitRead(currentPattern_,0));
+          digitalWrite(7, bitRead(currentPattern_,0));
           digitalWrite(9, bitRead(currentPattern_,1));
           digitalWrite(10, bitRead(currentPattern_,2));
           digitalWrite(11, bitRead(currentPattern_,3));
