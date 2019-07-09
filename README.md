@@ -8,6 +8,10 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 
 Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
+## Advantages
+* Baudrate increased to 500 000, nearly 9 times the transferspeed between Arduino and Micro-Manager
+* Some Arduinos have a buildin DAC. This is only 3.3V out, amplification might be needed.
+
 ## Working Arduino boards:
 * Teensy 3.2 & 3.1
   - Seems to work fine, but more testing is needed
