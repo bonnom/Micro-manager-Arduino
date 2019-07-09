@@ -166,7 +166,7 @@
  
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(57600); //Baud rate
+  Serial.begin(500000); //Baud rate
 
   pinMode(inPin_, INPUT);
   pinMode(dataPin, OUTPUT);
