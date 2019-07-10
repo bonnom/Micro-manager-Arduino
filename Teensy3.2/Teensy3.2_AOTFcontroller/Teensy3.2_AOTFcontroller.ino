@@ -132,7 +132,6 @@
   unsigned int version_ = 2;
 
  // pin on whick to receive the trigger (2 and 3 can be used with interrupts, although this code does not use them)
-  int inPin_ = 2;
  // to read out the state of inPin_ faster, ise
  // int inPinBit_ = 1<< inPin_; // bit mask
 
@@ -167,6 +166,7 @@
   unsigned int msblsb = 0;
 
 // Channel selection
+  const int inPin_ = 2;
   const int ch1 = 8;
   const int ch2 = 9;
   const int ch3 = 10;
@@ -176,6 +176,7 @@
  
 void setup() {
   // put your setup code here, to run once:
+  analogWriteResolution(12);
   Serial.begin(500000); //Baud rate
 
   pinMode(inPin_, INPUT);
