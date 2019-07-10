@@ -233,7 +233,12 @@ void loop() {
               byte lsb = Serial.read();
               msblsb = (int)lsb + (int)msb * 256;
               //analogueOut(channel, msb, lsb);
-              analogWrite(A0, msblsb);
+              if( channel == 0){
+                analogWrite(A0, msblsb);
+              }
+              if (channel == 1){
+                analogWrite(A1, msblsb);
+                }
               Serial.write( byte(3));
               Serial.write( channel);
               Serial.write(msb);
