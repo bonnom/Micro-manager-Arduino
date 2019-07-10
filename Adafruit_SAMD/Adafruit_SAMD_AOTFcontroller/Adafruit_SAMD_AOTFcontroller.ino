@@ -132,15 +132,16 @@
   unsigned int version_ = 2;
 
  // pin on whick to receive the trigger (2 and 3 can be used with interrupts, although this code does not use them)
-  int inPin_ = 2;
  // to read out the state of inPin_ faster, ise
-  int inPinBit_ = 1<< inPin_; // bit mask
+ // int inPinBit_ = 1<< inPin_; // bit mask
 
+// Old Configurations
  // TLV5618 configuration
+ /*
   int dataPin  = 3; // DIN
   int clockPin = 4; // SLCK
   int latchPin = 5; // CS
-
+*/
   const int SEQUENCELENGTH = 12 ; //This shold be good enough for everybody
   byte triggerPattern_[SEQUENCELENGTH]       = {0,0,0,0,0,0,0,0,0,0,0,0};
   unsigned int triggerDelay_[SEQUENCELENGTH] = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -163,25 +164,28 @@
 
 //New additions for use of internal DAC
   unsigned int msblsb = 0;
+
+// Channel selection
+  const int inPin_ = 2;
+  const int ch1 = 8;
+  const int ch2 = 9;
+  const int ch3 = 10;
+  const int ch4 = 11;
+  const int ch5 = 12;
+  const int ch6 = 13;
  
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(500000); //Baud rate
 
   pinMode(inPin_, INPUT);
-  pinMode(dataPin, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
-
-  // Set analogue pins as input (not needed they are automatically input):
-  // DDRC = DDRC & B11000000; // For arduino uno
-
-  // Turn on build-in pull-up resistors
-  
+  //pinMode(dataPin, OUTPUT); is used for DAC
+  pinMode(ch1, OUTPUT);
+  pinMode(ch2, OUTPUT);
+  pinMode(ch3, OUTPUT);
+  pinMode(ch4, OUTPUT);
+  pinMode(ch5, OUTPUT);
+  pinMode(ch6, OUTPUT);
 }
 
 void loop() {
@@ -200,13 +204,8 @@ void loop() {
 
        if (!blanking_)
        {
-         digitalWrite(7, bitRead(currentPattern_,0));
-         digitalWrite(9, bitRead(currentPattern_,1));
-         digitalWrite(10, bitRead(currentPattern_,2));
-         digitalWrite(11, bitRead(currentPattern_,3));
-         digitalWrite(12, bitRead(currentPattern_,4));
-         digitalWrite(13, bitRead(currentPattern_,5));
          portbAlt = currentPattern_;
+         writePattern(currentPattern_);
        }
        Serial.write(byte(1));
       }
@@ -220,6 +219,8 @@ void loop() {
           break;
       // Set Analogue output (TODO: save for 'Get Analogue output')
       //Not Implemented at the moment
+      
+      // DAC
       case 3:
         if (waitForSerial(timeOut_))
         {
@@ -286,13 +287,7 @@ void loop() {
            sequenceNr_ = 0;
            triggerNr_ = -skipTriggers_;
            triggerState_ = digitalRead(inPin_) == HIGH;
-           portbAlt = B00000000;
-           digitalWrite(7, 0);
-           digitalWrite(9, 0);
-           digitalWrite(10, 0);
-           digitalWrite(11, 0);
-           digitalWrite(12, 0);
-           digitalWrite(13, 0);
+           portbAlt = writeZeros();
            Serial.write( byte(8));
            triggerMode_ = true;           
          }
@@ -301,13 +296,7 @@ void loop() {
          // return result from last triggermode
        case 9:
           triggerMode_ = false;
-          portbAlt = B00000000;
-          digitalWrite(7, 0);
-          digitalWrite(9, 0);
-          digitalWrite(10, 0);
-          digitalWrite(11, 0);
-          digitalWrite(12, 0);
-          digitalWrite(13, 0);
+          portbAlt = writeZeros();
           Serial.write( byte(9));
           Serial.write( triggerNr_);
           break;
@@ -346,32 +335,16 @@ void loop() {
        //  starts timed trigger mode
        case 12: 
          if (patternLength_ > 0) {
-           portbAlt = B00000000;
-           digitalWrite(8, 0);
-           digitalWrite(9, 0);
-           digitalWrite(10, 0);
-           digitalWrite(11, 0);
-           digitalWrite(12, 0);
-           digitalWrite(13, 0);
+           portbAlt = writeZeros();
            Serial.write( byte(12));
            for (byte i = 0; i < repeatPattern_ && (Serial.available() == 0); i++) {
              for (int j = 0; j < patternLength_ && (Serial.available() == 0); j++) {
                portbAlt = triggerPattern_[j];
-               digitalWrite(7, bitRead(triggerPattern_[j],0));
-               digitalWrite(9, bitRead(triggerPattern_[j],1));
-               digitalWrite(10, bitRead(triggerPattern_[j],2));
-               digitalWrite(11, bitRead(triggerPattern_[j],3));
-               digitalWrite(12, bitRead(triggerPattern_[j],4));
-               digitalWrite(13, bitRead(triggerPattern_[j],5));
+               writePattern(triggerPattern_[j]);
                delay(triggerDelay_[j]);
              }
            }
-           digitalWrite(7, 0);
-           digitalWrite(9, 0);
-           digitalWrite(10, 0);
-           digitalWrite(11, 0);
-           digitalWrite(12, 0);
-           digitalWrite(13, 0);
+           writeZeros();
          }
          break;
 
@@ -419,7 +392,7 @@ void loop() {
        case 41:
          if (waitForSerial(timeOut_)) {
            int pin = Serial.read();  
-           if (pin >= 2 && pin <=5) {
+           if (pin >= 0 && pin <=5) {
               int val = analogRead(pin);
               Serial.write( byte(41));
               Serial.write( pin);
@@ -457,33 +430,16 @@ void loop() {
       boolean tmp = pindAlt;
       if (tmp != triggerState_) {
         if (blankOnHigh_ && tmp ) {
-          portbAlt = 0;
-          digitalWrite(7, 0);
-          digitalWrite(9, 0);
-          digitalWrite(10, 0);
-          digitalWrite(11, 0);
-          digitalWrite(12, 0);
-          digitalWrite(13, 0);
+          portbAlt = writeZeros();
           
         }
         else if (!blankOnHigh_ && !tmp ) {
-          portbAlt = 0;
-          digitalWrite(7, 0);
-          digitalWrite(9, 0);
-          digitalWrite(10, 0);
-          digitalWrite(11, 0);
-          digitalWrite(12, 0);
-          digitalWrite(13, 0);
+          portbAlt = writeZeros();
         }
         else { 
           if (triggerNr_ >=0) {
             portbAlt = triggerPattern_[sequenceNr_];
-            digitalWrite(7, bitRead(triggerPattern_[sequenceNr_],0));
-            digitalWrite(9, bitRead(triggerPattern_[sequenceNr_],1));
-            digitalWrite(10, bitRead(triggerPattern_[sequenceNr_],2));
-            digitalWrite(11, bitRead(triggerPattern_[sequenceNr_],3));
-            digitalWrite(12, bitRead(triggerPattern_[sequenceNr_],4));
-            digitalWrite(13, bitRead(triggerPattern_[sequenceNr_],5));
+            writePattern(triggerPattern_[sequenceNr_]);
             sequenceNr_++;
             if (sequenceNr_ >= patternLength_)
               sequenceNr_ = 0;
@@ -498,47 +454,24 @@ void loop() {
         if (! digitalRead(inPin_))
         {
           portbAlt = currentPattern_;
-          digitalWrite(7, bitRead(currentPattern_,0));
-          digitalWrite(9, bitRead(currentPattern_,1));
-          digitalWrite(10, bitRead(currentPattern_,2));
-          digitalWrite(11, bitRead(currentPattern_,3));
-          digitalWrite(12, bitRead(currentPattern_,4));
-          digitalWrite(13, bitRead(currentPattern_,5));
+          writePattern(currentPattern_);
         }
         else
         {
-          portbAlt = 0;
-          digitalWrite(7, 0);
-          digitalWrite(9, 0);
-          digitalWrite(10, 0);
-          digitalWrite(11, 0);
-          digitalWrite(12, 0);
-          digitalWrite(13, 0);
+          portbAlt = writeZeros();
         }
       }  else {
         if (! digitalRead(inPin_)) {
-          portbAlt = 0;
-          digitalWrite(7, 0);
-          digitalWrite(9, 0);
-          digitalWrite(10, 0);
-          digitalWrite(11, 0);
-          digitalWrite(12, 0);
-          digitalWrite(13, 0);
+          portbAlt = writeZeros();
         }
         else  {
           portbAlt = currentPattern_;
-          digitalWrite(7, bitRead(currentPattern_,0));
-          digitalWrite(9, bitRead(currentPattern_,1));
-          digitalWrite(10, bitRead(currentPattern_,2));
-          digitalWrite(11, bitRead(currentPattern_,3));
-          digitalWrite(12, bitRead(currentPattern_,4));
-          digitalWrite(13, bitRead(currentPattern_,5));
+          writePattern(currentPattern_);
         }
       }
     }
 }
 
- 
 bool waitForSerial(unsigned long timeOut)
 {
     unsigned long startTime = millis();
@@ -547,6 +480,28 @@ bool waitForSerial(unsigned long timeOut)
        return true;
     return false;
  }
+
+byte writeZeros()
+{
+    digitalWrite(ch1, 0);
+    digitalWrite(ch2, 0);
+    digitalWrite(ch3, 0);
+    digitalWrite(ch4, 0);
+    digitalWrite(ch5, 0);
+    digitalWrite(ch6, 0);
+    return portbAlt = 0;
+ }
+
+void writePattern(byte pattern_)
+{
+  digitalWrite(ch1, bitRead(pattern_,0));
+  digitalWrite(ch2, bitRead(pattern_,1));
+  digitalWrite(ch3, bitRead(pattern_,2));
+  digitalWrite(ch4, bitRead(pattern_,3));
+  digitalWrite(ch5, bitRead(pattern_,4));
+  digitalWrite(ch6, bitRead(pattern_,5));
+}
+
 
 // Sets analogue output in the TLV5618
 // channel is either 0 ('A') or 1 ('B')
