@@ -9,9 +9,10 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
 ## Advantages of 32 Bit-boards
-* Baudrate increased to 500 000, nearly 9 times the transferspeed between Arduino and Micro-Manager (there are some exceptions).
-* Some 32-bit Arduinos have a buildin DAC. This is only 3.3V out, amplification might be needed.
-* Easier to change preferred pins
+* Much faster, because of higher clock speed and more is done per clockcycle.
+* Baudrate increased to 500 000, nearly 9 times the transferspeed between Arduino and Micro-Manager (there are some exceptions). This can be even increased to 2 000 000, with micro-manager 2
+* Most 32-bit Arduinos have a buildin DAC (max 3.3V output)
+* Higher PWM frequencies and PWM bitresolutions
 
 ## Working Arduino boards:
 * ESP32
@@ -39,8 +40,6 @@ Also the digital output is 3.3V, most devices that work with 5V input also work 
 
 * Teensy 3.6
   - Teensy 3.6: NOT 5V TOLERANT!!
-
-  
   
 ## Not working boards:
   - Esp8266 board
@@ -49,9 +48,5 @@ Also the digital output is 3.3V, most devices that work with 5V input also work 
 
 ## To be tested:
  - Teensy LC
- - ESP32
  - A SAMD21 board
  - Teensy 3.5 (Very likely Works)
-
-## Functions not implemented
-Some functions are yet to be implemented:
