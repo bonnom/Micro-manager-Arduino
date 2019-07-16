@@ -508,8 +508,10 @@ bool waitForSerial(unsigned long timeOut)
 
 byte writeZeros()
 {
-    digitalWrite(ch1, 0);
-    digitalWrite(ch2, 0);
+    dacWrite(25, 0);
+    dacWrite(26, 0);
+    //digitalWrite(ch1, 0); removed for DAC blanking
+    //digitalWrite(ch32 0);
     digitalWrite(ch3, 0);
     digitalWrite(ch4, 0);
     digitalWrite(ch5, 0);
