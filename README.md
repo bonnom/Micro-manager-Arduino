@@ -8,6 +8,14 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 
 Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
+## Advantages of the sketches provided in this repo
+* Works on newer and faster boards, pin registers don't have to be used
+* Easier to adapt since pin registers aren't used
+  * This allows PWM + blanking
+  * DAC + blanking
+  * Possibility to choose different pins
+* No need for external DAC with most boards
+
 ## Advantages of 32 Bit-boards
 * Much faster, because of higher clock speed and more is done per clockcycle.
 * Baudrate increased to 500 000, nearly 9 times the transferspeed between Arduino and Micro-Manager (there are some exceptions). This can be even increased to 2 000 000, with micro-manager 2
