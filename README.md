@@ -46,26 +46,26 @@ Changes:
  
 ### Teensy 3.x Boards
 * All 3.x boards
- - Able to set PWM frequency and Resolution, for more information [link](https://www.pjrc.com/teensy/td_pulse.html)
- - At least one DAC
- - handy: Pinouts page [https://www.pjrc.com/teensy/pinout.html]
+  - Able to set PWM frequency and Resolution, for more information [link](https://www.pjrc.com/teensy/td_pulse.html)
+  - At least one DAC
+  - handy: Pinouts page [https://www.pjrc.com/teensy/pinout.html]
  
-  * Teensy 3.1 & 3.2
-    - Seems to work fine, but more testing is needed
-    - All currently used pins in the sketch are 5V tolerant
-    - Only one DAC on pin A14
-    - All other pins are the same as the original UNO firmware
+* Teensy 3.1 & 3.2
+  - Seems to work fine, but more testing is needed
+  - All currently used pins in the sketch are 5V tolerant
+  - Only one DAC on pin A14
+  - All other pins are the same as the original UNO firmware
 
-  * Teensy 3.5
-    - Not yet tested
-    - All currently used pins in the firmware are 5V tolerant
-    - DAC1 on pin 21 and DAC2 on pin 22
-    - Able to set PWM frequency and Resolution
+* Teensy 3.5 (Recommended)
+  - Not yet tested
+  - All currently used pins in the firmware are 5V tolerant
+  - DAC1 on pin 21 and DAC2 on pin 22
+  - Able to set PWM frequency and Resolution
 
-  * Teensy 3.6
-    - Uses same sketch as teensy 3.5
-    - Faster than teensy 3.5
-    - KEEP IN MIND: NOT 5V TOLERANT!!
+* Teensy 3.6
+  - Uses same sketch as teensy 3.5
+  - Faster than teensy 3.5
+  - KEEP IN MIND: NOT 5V TOLERANT!!
   
 ## Not working boards:
   - Esp8266 board
