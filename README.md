@@ -8,6 +8,8 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 
 Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
+The teensy 3.5 is currently the recommended board since it has two dacs and 5V tolerant inputs
+
 # Arduino32bitBoards device adapter (optional)
 A new Device Adapter for micro-manager is in development that offers more futures than the current Arduino device adapter. The device adapter is currently tested.
 Changes:
