@@ -166,7 +166,7 @@
 
 // Channel selection
   const int inPin_ = 2;
-  const int ch1 = 8;
+  const int ch1 = 7;
   const int ch2 = 9;
   const int ch3 = 10;
   const int ch4 = 11;
