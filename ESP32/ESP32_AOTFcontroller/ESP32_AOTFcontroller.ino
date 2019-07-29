@@ -158,18 +158,17 @@
 
 
 // Set the output channnels
-  const unsigned int inPin_ = 5;
-  const unsigned int ch1 = 23;
-  const unsigned int ch2 = 19;
-  const unsigned int ch3 = 18;
-  const unsigned int ch4 = 26;
-  const unsigned int ch5 = 16;
-  const unsigned int ch6 = 17;
+  const int inPin_ = 5;
+  const int ch1 = 25;
+  const int ch2 = 26;
+  const int ch3 = 27;
+  const int ch4 = 15;
+  const int ch5 = 14;
+  const int ch6 = 4;
   
 // New additions for rewrite code
   byte portbAlt = 0;
   byte pindAlt = 0;
-  byte Empty = 0;
 
 //New additions for use of internal DAC
   unsigned int msblsb = 0;
@@ -400,7 +399,7 @@ void loop() {
        case 40:
          Serial.write( byte(40));
          //Serial.write( PINC);
-         Serial.write( Empty); 
+         Serial.write( byte(0)); 
          break;
          
        case 41:
