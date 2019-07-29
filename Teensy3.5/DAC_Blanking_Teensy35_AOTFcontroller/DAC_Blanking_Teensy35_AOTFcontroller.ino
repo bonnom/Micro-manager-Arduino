@@ -167,7 +167,7 @@
   unsigned int msblsb1 = 255;
 
 // Channel selection
-  const unsigned int inPin_ = 2;
+  const unsigned int inPin_ = 5;
   //const unsigned int ch1 = 8;
   //const unsigned int ch2 = 9;
   const unsigned int ch3 = 10;
