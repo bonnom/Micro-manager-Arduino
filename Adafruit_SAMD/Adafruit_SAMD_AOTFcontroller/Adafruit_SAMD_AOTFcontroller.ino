@@ -160,13 +160,12 @@
 // New additions for rewrite code
   byte portbAlt = 0;
   byte pindAlt = 0;
-  byte Empty = 0;
 
 //New additions for use of internal DAC
   unsigned int msblsb = 0;
 
 // Channel selection
-  const int inPin_ = 2;
+  const int inPin_ = 5;
   const int ch1 = 8;
   const int ch2 = 9;
   const int ch3 = 10;
@@ -391,7 +390,7 @@ void loop() {
        case 40:
          Serial.write( byte(40));
          //Serial.write( PINC);
-         Serial.write( Empty); 
+         Serial.write( byte(0)); 
          break;
          
        case 41:

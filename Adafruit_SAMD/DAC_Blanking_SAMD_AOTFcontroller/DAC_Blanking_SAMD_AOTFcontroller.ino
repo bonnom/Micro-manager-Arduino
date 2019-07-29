@@ -165,15 +165,14 @@
 // New additions for rewrite code
   byte portbAlt = 0;
   byte pindAlt = 0;
-  byte Empty = 0;
 
 //New additions for use of internal DAC
-  unsigned int msblsb = 0;
-  unsigned int msblsb0 = 0;
-  unsigned int msblsb1 = 0;
+  //unsigned int msblsb = 0;
+  unsigned int msblsb0 = 4095; // If dac is not set it outputs just digital
+  unsigned int msblsb1 = 4055;
 
 // Channel selection
-  const int inPin_ = 2;
+  const int inPin_ = 5;
   const char *ch1 = "A0";     // Non Dac blanking -> const int ch1 = 8;
   const char *ch2 = "A1";     // Non Dac blanking -> const int ch2 = 9;
   const int ch3 = 10;
@@ -186,7 +185,7 @@ void setup() {
   Serial.begin(500000); //Baud rate
 
   pinMode(inPin_, INPUT);
-  //pinMode(dataPin, OUTPUT); is used for DAC
+  //pinMode(dataPin, OUTPUT); is used for external DAC
   //pinMode(ch1, OUTPUT);     is disabled with DAC blanking for SAMD boards
   //pinMode(ch2, OUTPUT);     is disabled with DAC blanking for SAMD boards
   pinMode(ch3, OUTPUT);
@@ -245,7 +244,7 @@ void loop() {
                 analogWrite(A0, msblsb0);
               }
               if (channel == 1){
-                msblsb1 = (int)lsb + (int)msb * 256;
+                msblsb1 = (int)lsb + (int)msb * 256; // Added DAC blanking
                 analogWrite(A1, msblsb1);
                 }
               Serial.write( byte(3));
@@ -400,7 +399,7 @@ void loop() {
        case 40:
          Serial.write( byte(40));
          //Serial.write( PINC);
-         Serial.write( Empty); 
+         Serial.write( byte(0)); 
          break;
          
        case 41:
