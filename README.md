@@ -8,14 +8,6 @@ Voltage level conversion must be needed when using 5V input on not 5V tolerant b
 
 The Teensy 3.5 is currently the recommended board.
 
-# Arduino32bitBoards device adapter (optional)
-A new Device Adapter for micro-manager is in development that offers more futures than the current Arduino device adapter. The device adapter is currently tested.
-Changes:
-* Added PWM control
-* Unified DAC and PWM
-* Changed unit of DAC/ PWM from "Volt" to "Power %" and the default scale to 0-100
-* Added three extra output channels to a total of 8
-
 ## Advantages of the sketches provided in this repo
 * Works on newer and faster boards, pin registers don't have to be used
 * Easier to adapt since pin registers aren't used
@@ -45,10 +37,10 @@ Changes:
   - KEEP IN MIND: NOT 5V TOLERANT!!
  
 ### Teensy 3.x Boards
-* All 3.x boards
-  - Able to set PWM frequency and Resolution, for more information [link](https://www.pjrc.com/teensy/td_pulse.html)
-  - At least one DAC
-  - handy: Pinouts page [https://www.pjrc.com/teensy/pinout.html]
+#### All 3.x boards
+ - Able to set PWM frequency and Resolution, for more information [link](https://www.pjrc.com/teensy/td_pulse.html)
+ - At least one DAC
+ - handy: Pinouts page [https://www.pjrc.com/teensy/pinout.html]
  
 * Teensy 3.1 & 3.2
   - Seems to work fine, but more testing is needed
