@@ -1,8 +1,0 @@
-﻿  Debayer.cpp
-  DeviceUtils.cpp
-  ImgBuffer.cpp
-  MMDevice.cpp
-  ModuleInterface.cpp
-  Property.cpp
-  Generating Code...
-  MMDevice-SharedRuntime.vcxproj -> C:\Users\Bonno\Google Drive\Github\micro-manager-mm2\DeviceAdapters\Arduino32bitBoards\build\Release\x64\MMDevice-SharedRuntime.lib
