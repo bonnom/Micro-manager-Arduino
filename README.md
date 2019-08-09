@@ -1,9 +1,12 @@
-This repo contains a more universal arduino firmware that works on some 32-bit arduino boards. It is a work in progress and the firmware isn't thoroughly tested yet. 
+This repo contains a more universal Micro-Manager arduino firmware for the Arduino deviceadapter. The firmware is written for some newer arduino boards. It is a work in progress and the firmware isn't thoroughly tested yet. 
+
+There is an other github that has firmware for the newer Arduino32bitBoards device adapter: https://github.com/bonnom/Arduino32BitBoards
+
 
 # Micro-manager-Arduino
-The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster 32-bit arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
+The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
 
-Please keep in mind that most 32-bit arduinos boards gets damaged when 5V is applied on the input pins. 
+Please keep in mind that many newer Arduino boards gets damaged when 5V is applied on the input pins. 
 Voltage level conversion must be needed when using 5V input on not 5V tolerant boards. Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
 
 The Teensy 3.5 is currently the recommended board.
@@ -15,12 +18,6 @@ The Teensy 3.5 is currently the recommended board.
   * DAC + blanking
   * Possibility to choose different pins
 * No need for external DAC with most boards
-
-## Advantages of 32 Bit-boards in general
-* Much faster, because of higher clock speed and more is done per clockcycle.
-* Baudrate increased to 500 000, nearly 9 times the transferspeed between Arduino and Micro-Manager (there are some exceptions). This can be even increased to 2 000 000, with micro-manager 2
-* Most 32-bit Arduinos have a buildin DAC (max 3.3V output)
-* Higher PWM frequencies and PWM bitresolutions
 
 ## Working Arduino boards:
 * ESP32
