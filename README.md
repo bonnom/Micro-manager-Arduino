@@ -28,13 +28,15 @@ The Teensy 3.5 is currently the recommended board.
   - Low Price boards available       
   - KEEP IN MIND: NOT 5V TOLERANT!!
   
-* ItsyBitsy M4 
+* ItsyBitsy M4
+  - Baudrate: 500,000
   - The ADC does not work at the moment because of DAC implementation
   - Channel 8 has become channel 7
   - KEEP IN MIND: NOT 5V TOLERANT!!
  
 ### Teensy 3.x Boards
 #### All 3.x boards
+ - Baudrate: 500,000
  - Able to set PWM frequency and Resolution, for more information [link](https://www.pjrc.com/teensy/td_pulse.html)
  - At least one DAC
  - handy: Pinouts page [https://www.pjrc.com/teensy/pinout.html]
@@ -57,11 +59,5 @@ The Teensy 3.5 is currently the recommended board.
   - KEEP IN MIND: NOT 5V TOLERANT!!
   
 ## Not working boards:
-  - Esp8266 board
   - Arduino Due
   - Sipeed Maix boards
-
-## To be tested:
- - Teensy LC
- - A SAMD21 board
- - Teensy 3.5 (Very likely Works)
