@@ -159,8 +159,8 @@
 
 // Set the output channnels
   const int inPin_ = 5;
-  const int ch1 = 25;
-  const int ch2 = 26;
+  const int ch1 = 21;
+  const int ch2 = 22;
   const int ch3 = 27;
   const int ch4 = 15;
   const int ch5 = 14;

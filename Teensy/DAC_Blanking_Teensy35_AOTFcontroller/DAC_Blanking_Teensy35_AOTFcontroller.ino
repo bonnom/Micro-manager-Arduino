@@ -162,25 +162,28 @@ byte portbAlt = 0;
 byte pindAlt = 0;
 
 //New additions for use of internal DAC
-unsigned int msblsb = 0;
+//unsigned int msblsb = 0;
+unsigned int msblsb0 = 255; // If dac is not set it outputs just digital
+unsigned int msblsb1 = 255;
 
 // Channel selection
-const int inPin_ = 5;
-const int ch1 = 6;
-const int ch2 = 9;
-const int ch3 = 10;
-const int ch4 = 11;
-const int ch5 = 12;
-const int ch6 = 13;
+const unsigned int inPin_ = 5;
+//const unsigned int ch1 = 8;
+//const unsigned int ch2 = 9;
+const unsigned int ch3 = 10;
+const unsigned int ch4 = 11;
+const unsigned int ch5 = 12;
+const unsigned int ch6 = 13;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(500000); //Baud rate
+  analogWriteResolution(12);
 
   pinMode(inPin_, INPUT);
-  //pinMode(dataPin, OUTPUT); is used for DAC
-  pinMode(ch1, OUTPUT);
-  pinMode(ch2, OUTPUT);
+  //pinMode(dataPin, OUTPUT); is used for external DAC
+  //pinMode(ch1, OUTPUT);
+  //pinMode(ch2, OUTPUT);
   pinMode(ch3, OUTPUT);
   pinMode(ch4, OUTPUT);
   pinMode(ch5, OUTPUT);
@@ -230,13 +233,15 @@ void loop() {
             msb &= B00001111;
             if (waitForSerial(timeOut_)) {
               byte lsb = Serial.read();
-              msblsb = (int)lsb + (int)msb * 256;
+              //msblsb = (int)lsb + (int)msb * 256;
               //analogueOut(channel, msb, lsb);
               if ( channel == 0) {
-                analogWrite(A0, msblsb);
+                msblsb0 = (int)lsb + (int)msb * 256; // Added DAC blanking
+                analogWrite(A21, msblsb0);
               }
-              if (channel == 1) {
-                analogWrite(A1, msblsb);
+              if ( channel == 1) {
+                msblsb1 = (int)lsb + (int)msb * 256; // Added DAC blanking
+                analogWrite(A22, msblsb1);
               }
               Serial.write( byte(3));
               Serial.write( channel);
@@ -487,8 +492,11 @@ bool waitForSerial(unsigned long timeOut)
 
 byte writeZeros()
 {
-  digitalWrite(ch1, 0);
-  digitalWrite(ch2, 0);
+
+  //digitalWrite(ch1, 0);
+  //digitalWrite(ch2, 0);
+  analogWrite(A21, 0);      // New for DAC Blanking
+  analogWrite(A22, 0);      // New for DAC Blanking
   digitalWrite(ch3, 0);
   digitalWrite(ch4, 0);
   digitalWrite(ch5, 0);
@@ -498,8 +506,25 @@ byte writeZeros()
 
 void writePattern(byte pattern_)
 {
-  digitalWrite(ch1, bitRead(pattern_, 0));
-  digitalWrite(ch2, bitRead(pattern_, 1));
+  //digitalWrite(ch1, bitRead(pattern_,0));
+  //digitalWrite(ch2, bitRead(pattern_,1));
+
+  if (bitRead(pattern_, 0) == 0)  // Added for DAC blanking
+  {
+    analogWrite(A21, 0);
+  }
+  else {
+    analogWrite(A21, msblsb0);
+  }
+
+  if (bitRead(pattern_, 1) == 0) // Added for DAC blanking
+  {
+    analogWrite(A22, 0);
+  }
+  else {
+    analogWrite(A22, msblsb1);
+  }
+
   digitalWrite(ch3, bitRead(pattern_, 2));
   digitalWrite(ch4, bitRead(pattern_, 3));
   digitalWrite(ch5, bitRead(pattern_, 4));

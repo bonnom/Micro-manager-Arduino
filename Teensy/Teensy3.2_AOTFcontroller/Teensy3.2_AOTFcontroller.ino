@@ -166,7 +166,7 @@ unsigned int msblsb = 0;
 
 // Channel selection
 const int inPin_ = 5;
-const int ch1 = 6;
+const int ch1 = 8;
 const int ch2 = 9;
 const int ch3 = 10;
 const int ch4 = 11;
@@ -175,10 +175,11 @@ const int ch6 = 13;
 
 void setup() {
   // put your setup code here, to run once:
+  analogWriteResolution(12);
   Serial.begin(500000); //Baud rate
 
   pinMode(inPin_, INPUT);
-  //pinMode(dataPin, OUTPUT); is used for DAC
+  //pinMode(dataPin, OUTPUT); is used for external DAC
   pinMode(ch1, OUTPUT);
   pinMode(ch2, OUTPUT);
   pinMode(ch3, OUTPUT);
@@ -232,12 +233,7 @@ void loop() {
               byte lsb = Serial.read();
               msblsb = (int)lsb + (int)msb * 256;
               //analogueOut(channel, msb, lsb);
-              if ( channel == 0) {
-                analogWrite(A0, msblsb);
-              }
-              if (channel == 1) {
-                analogWrite(A1, msblsb);
-              }
+              analogWrite(A14, msblsb);
               Serial.write( byte(3));
               Serial.write( channel);
               Serial.write(msb);
