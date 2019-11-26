@@ -2,6 +2,20 @@ This repo contains a more universal Micro-Manager arduino firmware for the origi
 
 There is an other github that has firmware for the newer Arduino32bitBoards device adapter: https://github.com/bonnom/Arduino32BitBoards
 
+
+
+
+# Micro-manager-Arduino
+The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
+
+This GitHub repo contains two types of firmwares, one is a normal one. This firmware works exactly like the original firmware.
+There is also firmware that has DAC_Blanking in the name. This firmware replaced the first (or two) channels with the DAC channels. This allows the DAC channels to be used as a Shutter.
+
+Please keep in mind that many newer Arduino boards gets damaged when 5V is applied on the input pins. 
+Voltage level conversion must be needed when using 5V input on not 5V tolerant boards. Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
+
+The Teensy 3.5 is currently the recommended board.
+
 ## Contents
   - [Advantages of the sketches provided in this repo](#advantages-of-the-sketches-provided-in-this-repo)
   - [Arduino boards information](#arduino-boards-information) contains settings and pinouts
@@ -9,15 +23,6 @@ There is an other github that has firmware for the newer Arduino32bitBoards devi
   - [Drivers](#drivers)
   - [Known bugs](#bugs)
   
-
-# Micro-manager-Arduino
-The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
-
-Please keep in mind that many newer Arduino boards gets damaged when 5V is applied on the input pins. 
-Voltage level conversion must be needed when using 5V input on not 5V tolerant boards. Also the digital output is 3.3V, most devices that work with 5V input also work fine with 3.3V input but this is not guaranteed.
-
-The Teensy 3.5 is currently the recommended board.
-
 ## Advantages of the sketches provided in this repo
 * Works on newer and faster boards, pin registers don't have to be used
 * Easier to adapt since pin registers aren't used
