@@ -1,9 +1,6 @@
-This repo contains a more universal Micro-Manager arduino firmware for the original Arduino device adapter (NOT Arduino32bitBoards). The firmware is written for some newer arduino boards. It is a work in progress and the firmware isn't thoroughly tested yet. 
+This repo contains a more universal Micro-Manager arduino firmware for the original Arduino device adapter (NOT Arduino32bitBoards). The firmware is written for some newer arduino boards. There is an other github that has firmware for the newer Arduino32bitBoards device adapter: https://github.com/bonnom/Arduino32BitBoards
 
-There is an other github that has firmware for the newer Arduino32bitBoards device adapter: https://github.com/bonnom/Arduino32BitBoards
-
-
-For questions, go to the "Issue section" and ask over there!
+I orginally wrote this code for my bachelor project, so I might not currently work with micro-manager but for questions, feel free to ask under the "Issue section" of this repository.
 
 # Micro-manager-Arduino
 The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
