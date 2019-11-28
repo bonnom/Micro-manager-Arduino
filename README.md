@@ -3,7 +3,7 @@ This repo contains a more universal Micro-Manager arduino firmware for the origi
 There is an other github that has firmware for the newer Arduino32bitBoards device adapter: https://github.com/bonnom/Arduino32BitBoards
 
 
-
+For questions, go to the "Issue section" and ask over there!
 
 # Micro-manager-Arduino
 The original micro-manager arduino firmware is specifically written for the Arduino uno and won't work on the newer and faster arduinos. This project aims to rewrite the original firmware to get compatibility with the newer arduino compatible boards. The original firmware and guide can be found on the micro-manager website [link](https://micro-manager.org/wiki/Arduino).
@@ -33,7 +33,42 @@ The Teensy 3.5 is currently the recommended board.
 
 
 ## Arduino boards information:
-* ESP32
+### Default pinout (Not DAC-Blanking)
+These are the defaults pinouts unless stated otherwise
+- Trigger: Pin 5 (not for ItsyBitsy M4)
+- Channel 1: Pin 8 (Pin 7: ItsyBitsy M4)
+- Channel 2: Pin 9
+- Channel 3: Pin 10
+- Channel 4: Pin 11
+- Channel 5: Pin 12
+- Channel 6: Pin 13
+
+### Default pinout DAC-Blanking firmware
+- Trigger: Pin 5 (not for ItsyBitsy M4)
+- Channel 1: (Depends on Board, see below)
+- Channel 2: (Depends on Board, see below)
+- Channel 3: Pin 10
+- Channel 4: Pin 11
+- Channel 5: Pin 12
+- Channel 6: Pin 13
+
+### Adafruit
+* ItsyBitsy M4
+  - Baudrate: 500,000
+  - Trigger: Pin 2
+  - DAC 1: Pin A0
+  - DAC 2: Pin A1
+  - The ADC does not work at the moment because of DAC implementation!
+  - KEEP IN MIND: NOT 5V TOLERANT!!
+
+* Adafruit SAMD (Works on M4 Feather, M4 express, etc.)
+  - Baudrate: 500,000
+  - DAC 1: Pin A0
+  - DAC 2: Pin A1
+  - The ADC does not work at the moment because of DAC implementation!
+  - KEEP IN MIND: NOT 5V TOLERANT!!
+  
+### ESP32
   - Baudrate: 115200
   - DAC1 on pin 25 and DAC2 on pin 26
   - ADC not implemented
@@ -41,11 +76,6 @@ The Teensy 3.5 is currently the recommended board.
   - Low Price boards available       
   - KEEP IN MIND: NOT 5V TOLERANT!!
   
-* ItsyBitsy M4
-  - Baudrate: 500,000
-  - The ADC does not work at the moment because of DAC implementation
-  - Channel 8 has become channel 7
-  - KEEP IN MIND: NOT 5V TOLERANT!!
  
 ### Teensy 3.x Boards
 #### All 3.x boards
